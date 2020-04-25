@@ -126,12 +126,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BL\Admin.cs" />
     <Compile Include="Models\BL\Client.cs" />
+    <Compile Include="Models\BL\Deposit.cs" />
     <Compile Include="Models\BL\Import.cs" />
     <Compile Include="Models\BL\Product.cs" />
     <Compile Include="Models\BL\User.cs" />
@@ -178,6 +181,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
+    <Content Include="Views\Client\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

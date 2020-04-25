@@ -26,5 +26,11 @@ namespace Obligatorio1.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Login(int id, string password)
+        {
+            return Redirect("Home/Index");
+        }
     }
 }
