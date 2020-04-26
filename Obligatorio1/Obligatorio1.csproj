@@ -138,6 +138,7 @@
     <Compile Include="Models\BL\Import.cs" />
     <Compile Include="Models\BL\Product.cs" />
     <Compile Include="Models\BL\User.cs" />
+    <Compile Include="Models\BL\Utilities.cs" />
     <Compile Include="Models\Repositories\ClientRepository.cs" />
     <Compile Include="Models\Repositories\ImportRepository.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />

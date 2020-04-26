@@ -22,7 +22,7 @@ namespace Obligatorio1.Models.Repositories
                     string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                     SqlConnection con = new SqlConnection(connectionString);
 
-                    SqlCommand command = new SqlCommand("INSERT INTO User(Id, UserRole) VALUES(@id, @userRole)", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO Users(Id, UserRole) VALUES(@id, @userRole)", con);
 
                     SqlParameter id = new SqlParameter("@id", instance.Id);
                     SqlParameter userName = new SqlParameter("@userName", instance.Role);

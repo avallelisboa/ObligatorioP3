@@ -35,7 +35,7 @@ namespace Obligatorio1.Models.BL
             string message = "La cédula debe tener 7 u 8 dígitos";
             bool isValid = false;
 
-            int digits = digitsNumber(id);
+            int digits = Utilities.digitsNumber(id);
             if (digits == 7 || digits == 8)
             {
                 isValid = true;
@@ -46,18 +46,6 @@ namespace Obligatorio1.Models.BL
             return result;
         }
 
-        public static int digitsNumber(int n)
-        {
-            int d = 1;
-
-            while (n >= 10)
-            {
-                n /= 10;
-                d++;
-            }
-
-            return d;
-        }
 
         public Tuple<bool, string> isUserValid()
         {
