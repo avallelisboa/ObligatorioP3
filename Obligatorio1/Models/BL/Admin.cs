@@ -9,5 +9,9 @@ namespace Obligatorio1.Models.BL
     {
         public Admin(int id, string password) : base(id, password, "admin") { }
 
+        public int GetExpectedIncome(Client client)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

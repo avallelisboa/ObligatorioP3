@@ -14,5 +14,10 @@ namespace Obligatorio1.Models.BL
 
         public Client(string name, int tin) {Name = name; Tin = tin;}
 
+        public string AddImport(Import import)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

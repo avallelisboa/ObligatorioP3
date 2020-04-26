@@ -7,22 +7,19 @@ namespace Obligatorio1.Models.BL
 {
     public abstract class User
     {
-        private string _password;
-
+        public string Password { get; private set; }
         public int Id { get; private set; }
         public string Role { get; private set; }
 
 
-        protected User(int id, string password, string role) {Id = id; _password = password; Role = role;}
+        protected User(int id, string password, string role) {Id = id; Password = password; Role = role;}
 
         private Tuple<bool,string> isPasswordValid()
         {
-            string password = this._password;
-
             bool isValid = false;
             string message = "La contraseña debe tener mínimo 6 caracteres, 1 mayúscula, 1 minúscula y 1 número";
 
-            if (password.Length >= 6 && password.Any(ch => char.IsUpper(ch)) && password.Any(ch => char.IsLower(ch)) && password.Any(ch => char.IsNumber(ch)))
+            if (Password.Length >= 6 && Password.Any(ch => char.IsUpper(ch)) && Password.Any(ch => char.IsLower(ch)) && Password.Any(ch => char.IsNumber(ch)))
             {
                 isValid = true;
                 message = "La contraseña es correcta";
@@ -47,22 +44,22 @@ namespace Obligatorio1.Models.BL
 
             Tuple<bool, string> result = new Tuple<bool, string>(isValid, message);
             return result;
-
-            int digitsNumber(int n)
-            {
-                int d = 1;
-
-                while (n >= 10)
-                {
-                    n /= 10;
-                    d++;
-                }
-
-                return d;
-            }
         }
 
-        protected Tuple<bool, string> isUserValid()
+        public static int digitsNumber(int n)
+        {
+            int d = 1;
+
+            while (n >= 10)
+            {
+                n /= 10;
+                d++;
+            }
+
+            return d;
+        }
+
+        public Tuple<bool, string> isUserValid()
         {
             string message = "";
             bool isValid = true;
