@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Obligatorio1.Controllers
 {
-    public class ClientController : Controller
+    public class DepositController : Controller
     {
         // GET: Client
         public ActionResult Index()

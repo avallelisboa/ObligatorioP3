@@ -73,7 +73,7 @@ namespace Obligatorio1.Models.Repositories
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
 
-                SqlCommand command = new SqlCommand("SELECT TOP 1 FROM Users WHERE Users.Id = @id", con);
+                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Users WHERE Users.Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);    
                 command.Parameters.Add(_id);
