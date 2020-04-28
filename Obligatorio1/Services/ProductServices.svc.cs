@@ -1,26 +1,40 @@
-﻿using System;
+﻿using Obligatorio1.Models.BL;
+using Obligatorio1.Models.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.ServiceModel.Web;
 using System.Text;
-using Obligatorio1.Models.BL;
-using Obligatorio1.Models.Repositories;
 
 namespace Obligatorio1.Services
 {
-    [ServiceContract]
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ProductServices : IProductServices
     {
-        [OperationContract]
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<ProductDTO> GetProducts()
         {
             IRepository<Product> repository = new ProductRepository();
             var products = repository.FindAll();
-            return products;
+            List<ProductDTO> productDTOs = new List<ProductDTO>();
+            foreach (Product p in products)
+            {
+                productDTOs.Add(new ProductDTO(p.Id, p.Name, p.Ammount));
+            }
+            return productDTOs;
         }
     }
+
+    [DataContract]
+    public class ProductDTO
+    {
+        public ProductDTO(int id, string name, int ammount) { Id = id; Name = name; Ammount = ammount; }
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public int Ammount { get; set; }
+    }
+
+
 }

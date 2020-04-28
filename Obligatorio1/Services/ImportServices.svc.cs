@@ -11,18 +11,26 @@ using Obligatorio1.Models.Repositories;
 
 namespace Obligatorio1.Services
 {
-    [ServiceContract]
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ImportServices : IImportServices
     {
-        public bool AddImport(Product product, Client client, int priceByUnit,
+        public bool AddImport(ProductDTO productDTO, ClientDTO clientDTO, int priceByUnit,
             int ammount, string destiny, DateTime entryDate, DateTime departureDate)
         {
+            Product product = new Product(productDTO.Id, productDTO.Name, 0, null);
+            Client client = new Client("", clientDTO.Tin);
+
             IRepository<Import> repository = new ImportRepository();
             Import import = new Import(product, client, ammount, priceByUnit, entryDate, departureDate, destiny);
 
             if (repository.Add(import)) return true;
             else return false;
         }
+    }
+
+    [DataContract]
+    public class ClientDTO
+    {
+        [DataMember]
+        public int Tin { get; set; }
     }
 }

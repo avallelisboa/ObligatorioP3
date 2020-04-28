@@ -1,21 +1,17 @@
 ﻿using System;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.ServiceModel.Web;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
-using Obligatorio1.Models.BL;
-using Obligatorio1.Models.Repositories;
-
 
 namespace Obligatorio1.Services
 {
-    [ServiceContract]
-    public interface IProductServices
-    {
+	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IProductServices" in both code and config file together.
+	[ServiceContract]
+	public interface IProductServices
+	{
         [OperationContract]
-        IEnumerable<Product> GetProducts();
-    }
+        IEnumerable<ProductDTO> GetProducts();
+	}
 }

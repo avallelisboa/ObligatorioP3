@@ -73,8 +73,8 @@ C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\b
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csprojAssemblyReference.cache
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csproj.CoreCompileInputs.cache
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csproj.CopyComplete
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.dll
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.pdb
+C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csprojAssemblyReference.cache

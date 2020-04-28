@@ -43,9 +43,8 @@ namespace Obligatorio1.Controllers
                 }
                 else
                 {
-                    //TO DO Insert it into the database
-
-
+                    IRepository<User> userRepository = new UserRepository();
+                    userRepository.Add(admin);
 
                     Session["RegisterError"] = resultMessage;
                     return Redirect("../Home/Index");
@@ -68,9 +67,8 @@ namespace Obligatorio1.Controllers
                 }
                 else
                 {
-                    //TO DO Insert it into the database
-
-
+                    IRepository<User> userRepository = new UserRepository();
+                    userRepository.Add(deposit);
 
                     Session["RegisterError"] = resultMessage;
                     return Redirect("../Home/Index");
@@ -89,9 +87,16 @@ namespace Obligatorio1.Controllers
             Session["LoginError"] = null;
 
             IRepository<User> userRepository = new UserRepository();
-            //ToDo
+            User user = userRepository.FindById(id);
 
-            Session["LoginError"] = "Los Datos no son correctos";
+            if (user == null) Session["LoginError"] = "El usuario no existe";
+            else if (!(user.Password == password)) Session["LoginError"] = "La contraseña no es correcta";
+            else
+            {
+                Session["LoggedUser"] = user;
+                if (user.Role == "admin") return Redirect("../Admin/Index");
+                if (user.Role == "deposit") return Redirect("../Deposit/Index");
+            }
             return Redirect("../Home/Index");
         }
     }

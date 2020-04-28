@@ -52,7 +52,14 @@ namespace Obligatorio1.Models.Repositories
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
 
-                SqlCommand command = new SqlCommand("SELECT * FROM Products", con);
+                SqlCommand command = new SqlCommand("" +
+                    "SELECT p.Id, p.ProductName, p.ProductWeight, p.ClientTin," +
+                        "(SELECT sum(Ammount)" +
+                        "FROM Imports i" +
+                        "GROUP BY ProductId" +
+                        "HAVING p.Id = i.ProductId) as Ammount" +
+                    "FROM Products p",
+                    con);
                 var result = command.ExecuteReader().Cast<Product>();
 
                 con.Close();

@@ -20,7 +20,7 @@ namespace Obligatorio1.Models.Repositories
                 SqlCommand command = new SqlCommand("INSERT INTO Imports(ProductId, Tin, PriveByUnit, Ammmount, Destiny, EntryDate, DepartureDate) VALUES(@productid, @tin, @pricebyunit, @destiny, @entrydate, @departuredate)", con);
 
                 SqlParameter ProductId = new SqlParameter("@id", instance.ImportedProduct.Id);
-                SqlParameter PriceByUnit = new SqlParameter("@pricebyunit", instance.PriceByUnit;
+                SqlParameter PriceByUnit = new SqlParameter("@pricebyunit", instance.PriceByUnit);
                 SqlParameter Ammount = new SqlParameter("@ammount", instance.Ammount);
                 SqlParameter Destiny = new SqlParameter("@destiny", instance.Destiny);
                 SqlParameter EntryDate = new SqlParameter("@entrydate", instance.EntryDate);
