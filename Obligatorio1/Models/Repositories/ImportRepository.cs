@@ -16,6 +16,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("INSERT INTO Imports(ProductId, Tin, PriveByUnit, Ammmount, Destiny, EntryDate, DepartureDate) VALUES(@productid, @tin, @pricebyunit, @destiny, @entrydate, @departuredate)", con);
 
@@ -56,6 +57,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Imports", con);
                 var result = command.ExecuteReader().Cast<Import>();
@@ -76,16 +78,36 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Import WHERE Imports.Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);
                 command.Parameters.Add(_id);
 
-                var result = (Import)command.ExecuteScalar();
+                var result = command.ExecuteReader();
+
+                Product ImportedProduct = null; Client ImportingClient = null; int Ammount = 0; int PriceByUnit = 0;
+                DateTime EntryDate = DateTime.Now; DateTime DepartureDate = DateTime.Now; string Destiny = null;
+
+                var prodRepository = new ProductRepository();
+                var cliRepository = new ClientRepository();
+
+                if (result.Read())
+                {
+                    ImportedProduct = prodRepository.FindById(Convert.ToInt32(result["ProductId"]));
+                    ImportingClient = cliRepository.FindById(Convert.ToInt32(result["Tin"]));
+                    Ammount = Convert.ToInt32(result["Ammount"]);
+                    PriceByUnit = Convert.ToInt32(result["PriceByUnit"]);
+                    EntryDate = Convert.ToDateTime(result["EntryDate"]);
+                    DepartureDate = Convert.ToDateTime(result["DepartureDate"]);
+                    Destiny = Convert.ToString(result["Destiny"]);
+                }
+
+                Import _import = new Import(ImportedProduct, ImportingClient, Ammount, PriceByUnit, EntryDate, DepartureDate, Destiny);
 
                 con.Close();
-                return result;
+                return _import;
             }
             catch (Exception err)
             {
@@ -99,6 +121,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("DELETE * FROM Imports WHERE Users.Id = @id", con);
 
@@ -135,6 +158,7 @@ namespace Obligatorio1.Models.Repositories
                 {
                     string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                     SqlConnection con = new SqlConnection(connectionString);
+                    con.Open();
 
                     SqlCommand command = new SqlCommand("UPDATE Users SET UserRole = @role, Password = @password WHERE Users.Id = @id", con);
 

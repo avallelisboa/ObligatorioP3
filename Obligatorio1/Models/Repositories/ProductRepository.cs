@@ -16,6 +16,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("INSERT INTO Products(Id, ProductName, ProductWeight, ClientTin) VALUES(@id, @productName, @productWeight, @clientTin)", con);
 
@@ -78,16 +79,30 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Products WHERE Product.Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);
                 command.Parameters.Add(_id);
 
-                var result = (Product)command.ExecuteScalar();
+                var result = command.ExecuteReader();
+
+                int Id = 0; ; string Name = ""; int Weight = 0; Client Importer = null;
+                var impRepository = new ClientRepository();
+
+                if (result.Read())
+                {
+                    Id = Convert.ToInt32(result["Id"]);
+                    Name = Convert.ToString(result["ProductName"]);
+                    Weight = Convert.ToInt32(result["Weight"]);
+                    Importer = impRepository.FindById(Convert.ToInt32(result["ClientTin"]));
+                }
+
+                Product _product = new Product(Id, Name, Weight, Importer);
 
                 con.Close();
-                return result;
+                return _product;
             }
             catch (Exception err)
             {

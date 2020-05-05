@@ -11,7 +11,16 @@ namespace Obligatorio1.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            if (Convert.ToString(Session["Role"]) == "admin")
+                return View("Admin");
+            else return Redirect("../Home/Index");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["LoggedUser"] = null;
+            Session["Role"] = null;
+            return Redirect("../Home/Index");
         }
     }
 }

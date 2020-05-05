@@ -21,6 +21,7 @@ namespace Obligatorio1.Models.Repositories
                 {
                     string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                     SqlConnection con = new SqlConnection(connectionString);
+                    con.Open();
 
                     SqlCommand command = new SqlCommand("INSERT INTO Users(Id, UserRole) VALUES(@id, @userRole)", con);
 
@@ -52,6 +53,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Users", con);
                 var result = command.ExecuteReader().Cast<User>();
@@ -73,15 +75,31 @@ namespace Obligatorio1.Models.Repositories
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
 
-                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Users WHERE Users.Id = @id", con);
+                con.Open();
+
+                SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE Users.Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);    
                 command.Parameters.Add(_id);
 
-                var result = (User)command.ExecuteScalar();
+                var reader = command.ExecuteReader();
 
+                int Id = 0; string Role="";string Password="";
+
+                if (reader.Read())
+                {
+                    Id = Convert.ToInt32(reader["Id"]);
+                    Role = Convert.ToString(reader["UserRole"]);
+                    Password = Convert.ToString(reader["Password"]);
+                }
                 con.Close();
-                return result;
+
+                User _user;
+
+                if (Role == "admin") _user = new Admin(Id, Password);
+                else _user = new Deposit(Id, Password);
+                
+                return _user;
             }
             catch (Exception err)
             {
@@ -95,6 +113,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("DELETE * FROM Users WHERE Users.Id = @id", con);
 
@@ -126,6 +145,7 @@ namespace Obligatorio1.Models.Repositories
                 {
                     string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                     SqlConnection con = new SqlConnection(connectionString);
+                    con.Open();
 
                     SqlCommand command = new SqlCommand("UPDATE Users SET UserRole = @Role, Password = @Password WHERE Users.Id = @id", con);
 

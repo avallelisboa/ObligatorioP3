@@ -94,8 +94,9 @@ namespace Obligatorio1.Controllers
             else
             {
                 Session["LoggedUser"] = user;
+                Session["Role"] = user.Role;
                 if (user.Role == "admin") return Redirect("../Admin/Index");
-                if (user.Role == "deposit") return Redirect("../Deposit/Index");
+                if (user.Role == "deposito") return Redirect("../Deposit/Index");
             }
             return Redirect("../Home/Index");
         }

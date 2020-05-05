@@ -3,14 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My ASP.NET Application</title>
+    <title>PortLog</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     <main class="container">
         <section class="row">
-            <form class="col-6" method="post" action="../Home/Register">
+            <form class="col-lg-7" method="post" action="../Home/Register">
                 <h2>Registro</h2>
                 <label for="registerId">Cédula de Indentidad</label><input type="number" id="registerId" name="id" />
                 <label for="registerPassword">Contraseña</label><input type="password" id="registerPassword" name="password" />
@@ -25,13 +27,13 @@
         <section class="row">
             @if (Session["RegisterError"] != null)
             {
-                <article class="col-6 bg-danger">
+                <article class="col-lg-6 bg-danger">
                     <p>@Convert.ToString(Session["RegisterError"])</p>
                 </article>
             }
         </section>
         <section class="row">
-            <form class="col-6" method="post" action="../Home/Login">
+            <form class="col-lg-7" method="post" action="../Home/Login">
                 <h2>Iniciar sesión</h2>
                 <label for="loginId">Cédula de Indentidad</label><input type="number" id="loginId" name="id" />
                 <label for="loginPassword">Contraseña</label><input type="password" id="loginPassword" name="password" />
@@ -41,13 +43,11 @@
         <section class="row">
             @if (Session["LoginError"] != null)
             {
-                <article class="col-6 bg-danger">
+                <article class="col-7 bg-danger">
                     <p>@Convert.ToString(Session["LoginError"])</p>
                 </article>
             }
         </section>
     </main>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

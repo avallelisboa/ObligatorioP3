@@ -21,6 +21,7 @@ namespace Obligatorio1.Models.Repositories
                 {
                     string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                     SqlConnection con = new SqlConnection(connectionString);
+                    con.Open();
 
                     SqlCommand command = new SqlCommand("INSERT INTO Client(Tin, Name, Discount, Seniority) VALUES(@tin, @name, @discount, @seniority)", con);
 
@@ -54,6 +55,7 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Clients", con);
                 var result = command.ExecuteReader().Cast<Client>();
@@ -74,16 +76,26 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Clients WHERE Clients.Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);
                 command.Parameters.Add(_id);
 
-                var result = (Client)command.ExecuteScalar();
+                var result = command.ExecuteReader();
+                string Name = ""; int Tin = 0;
+
+                if (result.Read())
+                {
+                    Name = Convert.ToString(result["Name"]);
+                    Tin = Convert.ToInt32(result["Tin"]);
+                }
+
+                Client _client = new Client(Name, Tin);
 
                 con.Close();
-                return result;
+                return _client;
             }
             catch (Exception err)
             {
