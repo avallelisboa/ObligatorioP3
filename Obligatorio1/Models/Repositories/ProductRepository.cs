@@ -52,20 +52,33 @@ namespace Obligatorio1.Models.Repositories
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
                 SqlConnection con = new SqlConnection(connectionString);
+                con.Open();
 
                 SqlCommand command = new SqlCommand("" +
                     "SELECT p.Id, p.ProductName, p.ProductWeight, p.ClientTin," +
-                        "(SELECT sum(Ammount)" +
-                        "FROM Imports i" +
-                        "GROUP BY ProductId" +
-                        "HAVING p.Id = i.ProductId) as Ammount" +
+                        "(SELECT sum(Ammount) " +
+                        "FROM Imports i " +
+                        "GROUP BY i.ProductId " +
+                        "HAVING p.Id = i.ProductId) as Ammount " +
                     "FROM Products p",
                     con);
-                var result = command.ExecuteReader().Cast<Product>();
+                var result = command.ExecuteReader();
+                List<Product> products = new List<Product>();
+
+                var clRepository = new ClientRepository();
+
+                while (result.Read())
+                {
+                    string id = Convert.ToString(result["Id"]);
+                    string productName = Convert.ToString(result["ProductName"]);
+                    int productWeight = Convert.ToInt32(result["ProductWeight"]);
+                    Client client = clRepository.FindById(Convert.ToInt32(result["ClientTin"]));
+
+                    products.Add(new Product(id, productName, productWeight, client));
+                }
 
                 con.Close();
-
-                return result;
+                return products;
             }
             catch (Exception err)
             {

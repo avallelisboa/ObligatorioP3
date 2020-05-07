@@ -29,7 +29,7 @@
                 </aside>
             </nav>
             <article class="col-1">
-                <a class="nav-link" href="Logout">Logout</a>
+                <a class="nav-link" href="Logout">Salir</a>
             </article>
         </section>
     </header>
@@ -38,22 +38,14 @@
             <table class="table">
                 <tr>
                     <th>Código</th>
-                </tr>
-                <tr>
                     <th>Nombre</th>
-                </tr>
-                <tr>
                     <th>Unidades</th>
                 </tr>
                 @foreach (var p in ViewBag.productsList)
                 {
                     <tr>
                         <td>@p.Id</td>
-                    </tr>
-                    <tr>
                         <td>@p.Name</td>
-                    </tr>
-                    <tr>
                         <td>@p.Ammount</td>
                     </tr>
                 }

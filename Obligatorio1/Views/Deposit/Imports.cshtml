@@ -15,11 +15,7 @@
             <table class="table">
                 <tr>
                     <th>Código</th>
-                </tr>
-                <tr>
                     <th>Nombre</th>
-                </tr>
-                <tr>
                     <th>Unidades</th>
                 </tr>
                 @foreach (var p in ViewBag.productsList)
@@ -27,18 +23,10 @@
                     if (p.Id == ViewBag.idProduct)
                     {
                         <tr>
-                            <td>@p.Id</td>
-                        </tr>
-                        <tr>
-                            <td>@p.Name</td>
-                        </tr>
-                        <tr>
-                            <td>@p.Ammount</td>
-                        </tr>
-                        <tr>
-                            <td>@p.ProductWeight</td>
-                        </tr>
-                        <tr>
+                            <td>@p.Id</td>                        
+                            <td>@p.Name</td>                        
+                            <td>@p.Ammount</td>                        
+                            <td>@p.ProductWeight</td>                        
                             <td>@p.ClientTin</td>
                         </tr>
                     }
