@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Obligatorio1.Services;
 
 namespace Obligatorio1.Controllers
 {
@@ -12,7 +13,12 @@ namespace Obligatorio1.Controllers
         public ActionResult Index()
         {
             if (Convert.ToString(Session["Role"]) == "admin")
+            {
+                ProductServices proxy = new ProductServices();
+                ViewBag.productsList = proxy.GetProducts();
+
                 return View("Admin");
+            }
             else return Redirect("../Home/Index");
         }
 

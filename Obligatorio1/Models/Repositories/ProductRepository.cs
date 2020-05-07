@@ -88,12 +88,12 @@ namespace Obligatorio1.Models.Repositories
 
                 var result = command.ExecuteReader();
 
-                int Id = 0; ; string Name = ""; int Weight = 0; Client Importer = null;
+                string Id = ""; ; string Name = ""; int Weight = 0; Client Importer = null;
                 var impRepository = new ClientRepository();
 
                 if (result.Read())
                 {
-                    Id = Convert.ToInt32(result["Id"]);
+                    Id = Convert.ToString(result["Id"]);
                     Name = Convert.ToString(result["ProductName"]);
                     Weight = Convert.ToInt32(result["Weight"]);
                     Importer = impRepository.FindById(Convert.ToInt32(result["ClientTin"]));
@@ -139,7 +139,7 @@ namespace Obligatorio1.Models.Repositories
             if (instance == null) return false;
             else
             {
-                int id = instance.Id;
+                string id = instance.Id;
                 string name = instance.Name;
                 int weight = instance.Weight;
                 int clientTin = instance.Importer.Tin;

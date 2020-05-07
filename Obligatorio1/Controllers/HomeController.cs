@@ -19,11 +19,12 @@ namespace Obligatorio1.Controllers
         public ActionResult Register(int id, string password, string role)
         {
             Session["RegisterError"] = null;
+            Session["LoginError"] = null;
 
 
             if(id <= 0 || password == null || role == null)
             {
-                Session["RegisterError"] = "Debe completar todos los datos de forma correcta";
+                Session["RegisterError"] = "Debe completar todos los datos de forma correcta.";
                 return Redirect("../Home/Index");
             }
 
@@ -85,6 +86,7 @@ namespace Obligatorio1.Controllers
         public ActionResult Login(int id, string password)
         {
             Session["LoginError"] = null;
+            Session["RegisterError"] = null;
 
             IRepository<User> userRepository = new UserRepository();
             User user = userRepository.FindById(id);

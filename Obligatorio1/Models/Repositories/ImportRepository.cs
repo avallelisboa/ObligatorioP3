@@ -146,7 +146,7 @@ namespace Obligatorio1.Models.Repositories
             else
             {
                 int id = instance.Id;
-                int productId = instance.ImportedProduct.Id;
+                string productId = instance.ImportedProduct.Id;
                 int tin = instance.ImportingClient.Tin;
                 int priceByUnit = instance.PriceByUnit;
                 int ammount = instance.Ammount;

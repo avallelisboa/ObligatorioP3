@@ -23,13 +23,15 @@ namespace Obligatorio1.Models.Repositories
                     SqlConnection con = new SqlConnection(connectionString);
                     con.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO Users(Id, UserRole) VALUES(@id, @userRole)", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO Users(Id, UserRole, Password) VALUES(@id, @userRole, @password)", con);
 
                     SqlParameter id = new SqlParameter("@id", instance.Id);
-                    SqlParameter userName = new SqlParameter("@userName", instance.Role);
+                    SqlParameter userName = new SqlParameter("@userRole", instance.Role);
+                    SqlParameter password = new SqlParameter("@password", instance.Password);
 
                     command.Parameters.Add(id);
                     command.Parameters.Add(userName);
+                    command.Parameters.Add(password);
 
                     if(command.ExecuteNonQuery() == 1)
                     {
@@ -42,7 +44,7 @@ namespace Obligatorio1.Models.Repositories
                 }
                 catch (Exception err)
                 {
-                    throw err;
+                    return false;
                 }
             }
         }

@@ -18,7 +18,7 @@ namespace Obligatorio1.Services
             List<ProductDTO> productDTOs = new List<ProductDTO>();
             foreach (Product p in products)
             {
-                productDTOs.Add(new ProductDTO(p.Id, p.Name, p.Ammount));
+                productDTOs.Add(new ProductDTO(p.Id, p.Name, p.Ammount, p.Weight, p.Importer.Tin));
             }
             return productDTOs;
         }
@@ -27,13 +27,19 @@ namespace Obligatorio1.Services
     [DataContract]
     public class ProductDTO
     {
-        public ProductDTO(int id, string name, int ammount) { Id = id; Name = name; Ammount = ammount; }
+        public ProductDTO(string id, string name, int ammount,
+            int productWeight, int clientTin)
+        { Id = id; Name = name; Ammount = ammount; ProductWeight = productWeight; ClientTin = clientTin; }
         [DataMember]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
         public int Ammount { get; set; }
+        [DataMember]
+        public int ProductWeight { get; set; }
+        [DataMember]
+        public int ClientTin { get; set; }
     }
 
 
