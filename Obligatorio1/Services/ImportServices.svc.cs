@@ -14,13 +14,13 @@ namespace Obligatorio1.Services
     public class ImportServices : IImportServices
     {
         public bool AddImport(ProductDTO productDTO, ClientDTO clientDTO, int priceByUnit,
-            int ammount, string destiny, DateTime entryDate, DateTime departureDate)
+            int ammount, bool IsStored, DateTime entryDate, DateTime departureDate)
         {
             Product product = new Product(productDTO.Id, productDTO.Name, 0, null);
-            Client client = new Client("", clientDTO.Tin);
+            Client client = new Client(clientDTO.Tin);
 
             IRepository<Import> repository = new ImportRepository();
-            Import import = new Import(product, client, ammount, priceByUnit, entryDate, departureDate, destiny);
+            Import import = new Import(product, client, ammount, priceByUnit, entryDate, departureDate, IsStored);
 
             if (repository.Add(import)) return true;
             else return false;
@@ -30,7 +30,17 @@ namespace Obligatorio1.Services
     [DataContract]
     public class ClientDTO
     {
+        public ClientDTO(long tin, string clientName, int discount,
+            int seniority, DateTime registerDate)
+        {
+            Tin = tin;ClientName = clientName; RegisterDate = registerDate;
+        }
+
         [DataMember]
-        public int Tin { get; set; }
+        public long Tin { get; set; }
+        [DataMember]
+        public string ClientName { get; set; }
+        [DataMember]
+        public DateTime RegisterDate { get; set; }
     }
 }

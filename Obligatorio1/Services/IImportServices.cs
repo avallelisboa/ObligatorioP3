@@ -17,6 +17,6 @@ namespace Obligatorio1.Services
     {
         [OperationContract]
         bool AddImport(ProductDTO productDTO, ClientDTO clientDTO, int priceByUnit,
-            int ammount, string destiny, DateTime entryDate, DateTime departureDate);
+            int ammount, bool isStored, DateTime entryDate, DateTime departureDate);
     }
 }

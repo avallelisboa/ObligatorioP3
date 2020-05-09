@@ -19,5 +19,17 @@ namespace Obligatorio1.Models.BL
 
             return d;
         }
+        public static int digitsNumber(long n)
+        {
+            int d = 1;
+
+            while (n >= 10)
+            {
+                n /= 10;
+                d++;
+            }
+
+            return d;
+        }
     }
 }

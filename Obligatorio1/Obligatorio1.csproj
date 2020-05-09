@@ -151,6 +151,10 @@
     <Compile Include="Models\Repositories\ProductRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClientServices.svc.cs">
+      <DependentUpon>ClientServices.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\IClientServices.cs" />
     <Compile Include="Services\IImportServices.cs" />
     <Compile Include="Services\ImportServices.svc.cs">
       <DependentUpon>ImportServices.svc</DependentUpon>
@@ -284,6 +288,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Services\ClientServices.svc" />
     <Content Include="Services\ImportServices.svc" />
     <Content Include="Services\ProductServices.svc" />
     <Content Include="Web.config">
@@ -316,6 +321,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Deposit\Imports.cshtml" />
+    <Content Include="Views\Admin\Clients.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

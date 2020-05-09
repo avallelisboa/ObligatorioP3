@@ -22,6 +22,18 @@ namespace Obligatorio1.Controllers
             else return Redirect("../Home/Index");
         }
 
+        public ActionResult Clients()
+        {
+            if (Convert.ToString(Session["Role"]) == "admin")
+            {
+                ClientServices proxy = new ClientServices();
+                ViewBag.clientList = proxy.GetClients();
+
+                return View("Clients");
+            }
+            else return Redirect("../Home/Index");
+        }
+
         public ActionResult Logout()
         {
             Session["LoggedUser"] = null;

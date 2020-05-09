@@ -72,9 +72,10 @@ namespace Obligatorio1.Models.Repositories
                     string id = Convert.ToString(result["Id"]);
                     string productName = Convert.ToString(result["ProductName"]);
                     int productWeight = Convert.ToInt32(result["ProductWeight"]);
-                    Client client = clRepository.FindById(Convert.ToInt32(result["ClientTin"]));
+                    int ammount = Convert.ToInt32(result["Ammount"]);
+                    Client client = clRepository.FindById(Convert.ToInt64(result["ClientTin"]));
 
-                    products.Add(new Product(id, productName, productWeight, client));
+                    products.Add(new Product(id, productName, productWeight, ammount, client));
                 }
 
                 con.Close();
@@ -155,7 +156,7 @@ namespace Obligatorio1.Models.Repositories
                 string id = instance.Id;
                 string name = instance.Name;
                 int weight = instance.Weight;
-                int clientTin = instance.Importer.Tin;
+                long clientTin = instance.Importer.Tin;
 
                 try
                 {

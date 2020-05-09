@@ -23,7 +23,7 @@ namespace Obligatorio1.Models.Repositories
                     SqlConnection con = new SqlConnection(connectionString);
                     con.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO Client(Tin, Name, Discount, Seniority) VALUES(@tin, @name, @discount, @seniority)", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO Client(Tin, ClientName, Discount, Seniority) VALUES(@tin, @name, @discount, @seniority)", con);
 
                     SqlParameter _tin = new SqlParameter("@tin", instance.Tin);
                     SqlParameter _name = new SqlParameter("@name", instance.Name);
@@ -58,11 +58,22 @@ namespace Obligatorio1.Models.Repositories
                 con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Clients", con);
-                var result = command.ExecuteReader().Cast<Client>();
+                var result = command.ExecuteReader();
+
+                List<Client> clientsList = new List<Client>();
+
+                while (result.Read())
+                {
+                    long _tin = Convert.ToInt64(result["Tin"]);
+                    string _name = Convert.ToString(result["ClientName"]);
+                    DateTime _registerDate = Convert.ToDateTime(result["RegisterDate"]);
+                    Client client = new Client(_name, _tin, _registerDate);
+                    clientsList.Add(client);
+                }
 
                 con.Close();
 
-                return result;
+                return clientsList;
             }
             catch (Exception err)
             {
@@ -78,21 +89,22 @@ namespace Obligatorio1.Models.Repositories
                 SqlConnection con = new SqlConnection(connectionString);
                 con.Open();
 
-                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Clients WHERE Clients.Id = @id", con);
+                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Clients WHERE Clients.Tin = @tin", con);
 
-                SqlParameter _id = new SqlParameter("@id", id);
-                command.Parameters.Add(_id);
+                SqlParameter tin = new SqlParameter("@tin", id);
+                command.Parameters.Add(tin);
 
                 var result = command.ExecuteReader();
-                string Name = ""; int Tin = 0;
+                string _name = ""; long _tin = 0;DateTime _registerDate = new DateTime();
 
                 if (result.Read())
                 {
-                    Name = Convert.ToString(result["Name"]);
-                    Tin = Convert.ToInt32(result["Tin"]);
+                    _name = Convert.ToString(result["ClientName"]);
+                    _tin = Convert.ToInt64(result["Tin"]);
+                    _registerDate = Convert.ToDateTime(result["RegisterDate"]);
                 }
 
-                Client _client = new Client(Name, Tin);
+                Client _client = new Client(_name, _tin, _registerDate);
 
                 con.Close();
                 return _client;
@@ -132,7 +144,7 @@ namespace Obligatorio1.Models.Repositories
             if (instance == null) return false;
             else
             {
-                int tin = instance.Tin;
+                long tin = instance.Tin;
                 string name = instance.Name;
                 int seniority = instance.Seniority;
                 int discount = instance.Discount;

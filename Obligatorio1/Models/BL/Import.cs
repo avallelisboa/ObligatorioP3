@@ -8,7 +8,7 @@ namespace Obligatorio1.Models.BL
     public class Import
     {
         public Import(Product importedProduct, Client importingClient, int ammount,
-                        int priceByUnit, DateTime entryDate, DateTime departureDate, string destiny)
+                        int priceByUnit, DateTime entryDate, DateTime departureDate, bool isStored)
         {
             ImportedProduct = importedProduct;
             ImportingClient = importingClient;
@@ -16,7 +16,7 @@ namespace Obligatorio1.Models.BL
             PriceByUnit = priceByUnit;
             EntryDate = entryDate;
             DepartureDate = departureDate;
-            Destiny = destiny;
+            IsStored = isStored;
         }
 
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace Obligatorio1.Models.BL
         public int PriceByUnit { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime DepartureDate { get; set; }
-        public string Destiny { get; set; }
+        public bool IsStored { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace Obligatorio1.Services
     public class ProductDTO
     {
         public ProductDTO(string id, string name, int ammount,
-            int productWeight, int clientTin)
+            int productWeight, long clientTin)
         { Id = id; Name = name; Ammount = ammount; ProductWeight = productWeight; ClientTin = clientTin; }
         [DataMember]
         public string Id { get; set; }
@@ -39,7 +39,7 @@ namespace Obligatorio1.Services
         [DataMember]
         public int ProductWeight { get; set; }
         [DataMember]
-        public int ClientTin { get; set; }
+        public long ClientTin { get; set; }
     }
 
 

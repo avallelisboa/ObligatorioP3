@@ -14,5 +14,7 @@ namespace Obligatorio1.Models.BL
         public int Ammount { get; set; }
 
         public Product(string id, string name, int weight, Client importer) { Id = id; Name = name; Weight = weight; Importer = importer; }
+
+        public Product(string id, string name, int weight, int ammount, Client importer) { Id = id; Name = name; Weight = weight; Ammount = ammount; Importer = importer; }
     }
 }
