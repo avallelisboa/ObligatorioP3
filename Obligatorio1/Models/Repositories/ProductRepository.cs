@@ -75,7 +75,7 @@ namespace Obligatorio1.Models.Repositories
                     int ammount = Convert.ToInt32(result["Ammount"]);
                     Client client = clRepository.FindById(Convert.ToInt64(result["ClientTin"]));
 
-                    products.Add(new Product(id, productName, productWeight, ammount, client));
+                    products.Add(new Product(id, productName, productWeight, client));
                 }
 
                 con.Close();
@@ -95,7 +95,7 @@ namespace Obligatorio1.Models.Repositories
                 SqlConnection con = new SqlConnection(connectionString);
                 con.Open();
 
-                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Products WHERE Product.Id = @id", con);
+                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM Products WHERE Id = @id", con);
 
                 SqlParameter _id = new SqlParameter("@id", id);
                 command.Parameters.Add(_id);
@@ -109,8 +109,8 @@ namespace Obligatorio1.Models.Repositories
                 {
                     Id = Convert.ToString(result["Id"]);
                     Name = Convert.ToString(result["ProductName"]);
-                    Weight = Convert.ToInt32(result["Weight"]);
-                    Importer = impRepository.FindById(Convert.ToInt32(result["ClientTin"]));
+                    Weight = Convert.ToInt32(result["ProductWeight"]);
+                    Importer = impRepository.FindById(Convert.ToInt64(result["ClientTin"]));
                 }
 
                 Product _product = new Product(Id, Name, Weight, Importer);

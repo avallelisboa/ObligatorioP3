@@ -22,26 +22,37 @@ namespace Obligatorio1.Controllers
             else return Redirect("../Home/Index");
         }
         [HttpGet]
-        public ActionResult Logout()
-        {
-            Session["LoggedUser"] = null;
-            Session["Role"] = null;
-            return Redirect("../Home/Index");
-        }
-        [HttpGet]
-        public ActionResult Imports(string idProduct)
+        public ActionResult Clients()
         {
             if (Convert.ToString(Session["Role"]) == "deposito")
             {
-                ViewBag.idProduct = idProduct;
-                return View("Imports");
+                ClientServices proxy = new ClientServices();
+                ViewBag.clientsList = proxy.GetClients();
+
+                return View("Clients");
             }
-            else return Redirect("Index");
+            else return Redirect("../Home/Index");
         }
         [HttpPost]
-        public ActionResult AddImport()
+        public ActionResult AddImport(string productId, long tin, int priceByUnit, int ammount, DateTime entryDate, DateTime departureDate, bool isStored)
         {
-            throw new NotImplementedException();
+            ImportServices proxy = new ImportServices();
+            if (proxy.AddImport(productId, tin, priceByUnit, ammount, isStored, entryDate, departureDate))
+            {
+                ViewBag.ImportAdded = true;
+            }
+            else
+            {
+                ViewBag.ImportAdded = false;
+            }
+            return View("Clients");
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return Redirect("../Home/Index");
         }
     }
 }

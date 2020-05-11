@@ -300,10 +300,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Services\Views\Web.config" />
-    <Content Include="Services\Views\Home\Index.cshtml" />
-    <Content Include="Services\Views\Admin\Admin.cshtml" />
-    <Content Include="Services\Views\Deposit\Deposit.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -318,9 +314,7 @@
     <Content Include="Views\Deposit\Deposit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Deposit\Imports.cshtml" />
+    <Content Include="Views\Deposit\Clients.cshtml" />
     <Content Include="Views\Admin\Clients.cshtml" />
   </ItemGroup>
   <ItemGroup>

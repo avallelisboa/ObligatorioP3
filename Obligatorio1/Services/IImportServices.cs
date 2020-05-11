@@ -16,7 +16,7 @@ namespace Obligatorio1.Services
     public interface IImportServices
     {
         [OperationContract]
-        bool AddImport(ProductDTO productDTO, ClientDTO clientDTO, int priceByUnit,
-            int ammount, bool isStored, DateTime entryDate, DateTime departureDate);
+        bool AddImport(string productId, long tin, int priceByUnit,
+            int ammount, bool IsStored, DateTime entryDate, DateTime departureDate);
     }
 }

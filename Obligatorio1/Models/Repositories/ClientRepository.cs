@@ -96,15 +96,18 @@ namespace Obligatorio1.Models.Repositories
 
                 var result = command.ExecuteReader();
                 string _name = ""; long _tin = 0;DateTime _registerDate = new DateTime();
+                int _discount = 0;
 
                 if (result.Read())
                 {
                     _name = Convert.ToString(result["ClientName"]);
                     _tin = Convert.ToInt64(result["Tin"]);
+                    _discount = Convert.ToInt32(result["Discount"]);
                     _registerDate = Convert.ToDateTime(result["RegisterDate"]);
                 }
 
-                Client _client = new Client(_name, _tin, _registerDate);
+                Client _client = new Client(_name, _tin,_discount, _registerDate);
+                
 
                 con.Close();
                 return _client;

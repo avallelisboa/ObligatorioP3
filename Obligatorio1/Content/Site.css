@@ -16,7 +16,9 @@ form label{
     margin: 0px;
     float: left;
 }
-form input[type="text"], form input[type="number"], form input[type="password"], form select {
+form input[type="text"], form input[type="number"],
+form input[type="password"], form input[type="date"], 
+form input[type="checkbox"], form select {
     width: 75%;
     margin: 0px;
     float: left;

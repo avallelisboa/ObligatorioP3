@@ -27,17 +27,24 @@ namespace Obligatorio1.Controllers
             if (Convert.ToString(Session["Role"]) == "admin")
             {
                 ClientServices proxy = new ClientServices();
-                ViewBag.clientList = proxy.GetClients();
+                ViewBag.clientsList = proxy.GetClients();
 
                 return View("Clients");
             }
             else return Redirect("../Home/Index");
         }
 
+        public ActionResult GetExpectedIncome(long tin)
+        {
+            ClientServices proxy = new ClientServices();
+            Session["expectedIncome"] = proxy.GetExpectedIncome(tin);
+
+            return Redirect("Clients");
+        }
+
         public ActionResult Logout()
         {
-            Session["LoggedUser"] = null;
-            Session["Role"] = null;
+            Session.Clear();
             return Redirect("../Home/Index");
         }
     }

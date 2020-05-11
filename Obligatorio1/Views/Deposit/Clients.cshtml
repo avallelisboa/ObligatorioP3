@@ -19,7 +19,7 @@
                 <aside class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="Index">Productos</a>
+                            <a class="nav-link" href="Index">Productos <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="Clients">Clients</a>
@@ -28,12 +28,12 @@
                 </aside>
             </nav>
             <article class="col-1">
-                <a class="nav-link" href="Logout">Salir</a>
+                <a class="btn btn-primary" href="Logout">Salir</a>
             </article>
         </section>
     </header>
     <main class="container">
-        <section id="clientssListSection">
+        <section id="clientsListSection">
             <table class="table">
                 <tr>
                     <th>Tin</th>
@@ -51,17 +51,27 @@
             </table>
         </section>
         <section>
-            <h2>Obtener previsión de ganancia</h2>
-            <form method="get" action="GetExpectedIncome">
-                
+            <h2>Agregar Importación</h2>
+            <form method="post" action="AddImport">
+                <label for="productId">Id del producto</label><input type="text" id="productId" name="productId" required />
                 <label for="tin">Rut del cliente</label><input type="number" id="tin" name="tin" required />
-                
-                <input type="submit" value="Obtener" />
+                <label for="priceByUnit">Precio por unidad</label><input type="number" id="priceByUnit" name="priceByUnit" required />
+                <label for="ammount">Cantidad</label><input type="number" id="ammount" name="ammount" required />
+                <label for="entryDate">Fecha de Ingreso</label><input type="date" id="entryDate" name="entryDate" required />
+                <label for="departureDate">Fecha de Salida</label><input type="date" id="departureDate" name="departureDate" required />
+                <label for="isStored">¿Está almacenado?</label><input type="checkbox" id="isStored" name="isStored" required />
+                <input type="submit" value="Agregar Importación" />
             </form>
-            @if (Session["expectedIncome"] != null)
+            @if (ViewBag.ImportAdded == true)
             {
-                <article class="bg-info">
-                    <p>La previsión de ganancia para el cliente ingresado es de: @Convert.ToInt32(Session["expectedIncome"])</p>
+                <article class="bg-success">
+                    <p>La importación fue agregada correctamente</p>
+                </article>
+            }
+            @if (ViewBag.ImportAdded == false)
+            {
+                <article class="bg-danger">
+                    <p>La importación no ha podido ser agregada</p>
                 </article>
             }
         </section>

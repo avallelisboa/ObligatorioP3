@@ -13,11 +13,11 @@ namespace Obligatorio1.Services
 {
     public class ImportServices : IImportServices
     {
-        public bool AddImport(ProductDTO productDTO, ClientDTO clientDTO, int priceByUnit,
+        public bool AddImport(string productId, long tin, int priceByUnit,
             int ammount, bool IsStored, DateTime entryDate, DateTime departureDate)
         {
-            Product product = new Product(productDTO.Id, productDTO.Name, 0, null);
-            Client client = new Client(clientDTO.Tin);
+            Product product = new Product(productId);
+            Client client = new Client(tin);
 
             IRepository<Import> repository = new ImportRepository();
             Import import = new Import(product, client, ammount, priceByUnit, entryDate, departureDate, IsStored);
