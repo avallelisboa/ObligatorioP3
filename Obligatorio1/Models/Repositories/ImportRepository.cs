@@ -18,21 +18,23 @@ namespace Obligatorio1.Models.Repositories
                 SqlConnection con = new SqlConnection(connectionString);
                 con.Open();
 
-                SqlCommand command = new SqlCommand("INSERT INTO Imports(ProductId, Tin, PriveByUnit, Ammmount, EntryDate, DepartureDate) VALUES(@productid, @tin, @pricebyunit, @entrydate, @departuredate)", con);
+                SqlCommand command = new SqlCommand("INSERT INTO Imports(ProductId, Tin, PriceByUnit, Ammount, EntryDate, DepartureDate, IsStored) VALUES(@productId, @tin, @pricebyunit, @ammount, @entrydate, @departuredate, @isStored)", con);
 
-                SqlParameter ProductId = new SqlParameter("@id", instance.ImportedProduct.Id);
+                SqlParameter ProductId = new SqlParameter("@productId", instance.ImportedProduct.Id);
+                SqlParameter Tin = new SqlParameter("@tin", instance.ImportingClient.Tin);
                 SqlParameter PriceByUnit = new SqlParameter("@pricebyunit", instance.PriceByUnit);
                 SqlParameter Ammount = new SqlParameter("@ammount", instance.Ammount);
                 SqlParameter EntryDate = new SqlParameter("@entrydate", instance.EntryDate);
                 SqlParameter DepartureDate = new SqlParameter("@departuredate", instance.DepartureDate);
-                SqlParameter Tin = new SqlParameter("@tin", instance.ImportingClient.Tin);
+                SqlParameter IsStored = new SqlParameter("@isStored", instance.IsStored);
 
                 command.Parameters.Add(ProductId);
+                command.Parameters.Add(Tin);
                 command.Parameters.Add(PriceByUnit);
                 command.Parameters.Add(Ammount);
                 command.Parameters.Add(EntryDate);
                 command.Parameters.Add(DepartureDate);
-                command.Parameters.Add(Tin);
+                command.Parameters.Add(IsStored);
 
                 if (command.ExecuteNonQuery() == 1)
                 {

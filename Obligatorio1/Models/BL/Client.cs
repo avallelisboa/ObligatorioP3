@@ -13,7 +13,7 @@ namespace Obligatorio1.Models.BL
         public int Discount { get; set; }
         public DateTime RegisterDate {get; set;}
         public IEnumerable<Product> Products { get; private set; }
-        
+        public IEnumerable<Import> Imports { get; private set; }
 
         public Client(string name, long tin, DateTime registerDate)
         { Name = name; Tin = tin; RegisterDate = registerDate; }

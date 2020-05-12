@@ -45,7 +45,7 @@ namespace Obligatorio1.Controllers
             {
                 ViewBag.ImportAdded = false;
             }
-            return View("Clients");
+            return Redirect("Clients");
         }
 
         [HttpGet]

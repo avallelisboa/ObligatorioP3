@@ -65,9 +65,5 @@ namespace Obligatorio1.Models.BL
             return result;
         }
 
-        public IEnumerable<Product> GetProductsCollection()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

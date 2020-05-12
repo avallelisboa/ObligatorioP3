@@ -59,7 +59,7 @@
                 <label for="ammount">Cantidad</label><input type="number" id="ammount" name="ammount" required />
                 <label for="entryDate">Fecha de Ingreso</label><input type="date" id="entryDate" name="entryDate" required />
                 <label for="departureDate">Fecha de Salida</label><input type="date" id="departureDate" name="departureDate" required />
-                <label for="isStored">¿Está almacenado?</label><input type="checkbox" id="isStored" name="isStored" required />
+                <label for="isStored">¿Está almacenado?</label><select name="isStored"><option value="true">Sí</option><option value="false">No</option></select>
                 <input type="submit" value="Agregar Importación" />
             </form>
             @if (ViewBag.ImportAdded == true)

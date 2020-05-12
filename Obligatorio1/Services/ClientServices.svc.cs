@@ -43,10 +43,8 @@ namespace Obligatorio1.Services
                 {
                     var elapsed = i.DepartureDate.Subtract(i.EntryDate);
                     int days = Convert.ToInt32(elapsed.TotalDays);
-
-                    int totalValue = (i.PriceByUnit) * (i.Ammount);
-
-                    int income = 2 * totalValue / (100 - discount);
+                    int income = 2 * i.PriceByUnit / (100 - discount);
+                    income = income * days;
                     expectedIncome += income;
                 }
             }

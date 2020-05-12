@@ -56,8 +56,9 @@ namespace Obligatorio1.Models.Repositories
 
                 SqlCommand command = new SqlCommand("" +
                     "SELECT p.Id, p.ProductName, p.ProductWeight, p.ClientTin," +
-                        "(SELECT sum(Ammount) " +
+                        "(SELECT sum(Ammount) " +                       
                         "FROM Imports i " +
+                        "WHERE i.IsStored = 1 "+
                         "GROUP BY i.ProductId " +
                         "HAVING p.Id = i.ProductId) as Ammount " +
                     "FROM Products p",
@@ -71,11 +72,17 @@ namespace Obligatorio1.Models.Repositories
                 {
                     string id = Convert.ToString(result["Id"]);
                     string productName = Convert.ToString(result["ProductName"]);
-                    int productWeight = Convert.ToInt32(result["ProductWeight"]);
-                    int ammount = Convert.ToInt32(result["Ammount"]);
+                    int productWeight = Convert.ToInt32(result["ProductWeight"]);                    
                     Client client = clRepository.FindById(Convert.ToInt64(result["ClientTin"]));
-
-                    products.Add(new Product(id, productName, productWeight, client));
+                    if (result["Ammount"].GetType() != typeof(DBNull))
+                    {
+                        int ammount = Convert.ToInt32(result["Ammount"]);
+                        products.Add(new Product(id, productName, productWeight, ammount, client));
+                    }
+                    else
+                    {
+                        products.Add(new Product(id, productName, productWeight, client));
+                    }
                 }
 
                 con.Close();
