@@ -9,7 +9,7 @@ namespace Obligatorio1.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+
         public ActionResult Index()
         {
             if (Convert.ToString(Session["Role"]) == "admin")
@@ -21,6 +21,7 @@ namespace Obligatorio1.Controllers
             }
             else return Redirect("../Home/Index");
         }
+
 
         public ActionResult Clients()
         {
@@ -36,10 +37,14 @@ namespace Obligatorio1.Controllers
 
         public ActionResult GetExpectedIncome(long tin)
         {
-            ClientServices proxy = new ClientServices();
-            Session["expectedIncome"] = proxy.GetExpectedIncome(tin);
+            if (Convert.ToString(Session["Role"]) == "admin")
+            {
+                ClientServices proxy = new ClientServices();
+                Session["expectedIncome"] = proxy.GetExpectedIncome(tin);
 
-            return Redirect("Clients");
+                return Redirect("Clients");
+            }
+            else return Redirect("../Home/Index");            
         }
 
         public ActionResult Logout()

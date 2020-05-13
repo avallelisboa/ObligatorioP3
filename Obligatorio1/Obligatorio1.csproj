@@ -154,7 +154,11 @@
     <Compile Include="Services\ClientServices.svc.cs">
       <DependentUpon>ClientServices.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\DBFiles.svc.cs">
+      <DependentUpon>DBFiles.svc</DependentUpon>
+    </Compile>
     <Compile Include="Services\IClientServices.cs" />
+    <Compile Include="Services\IDBFiles.cs" />
     <Compile Include="Services\IImportServices.cs" />
     <Compile Include="Services\ImportServices.svc.cs">
       <DependentUpon>ImportServices.svc</DependentUpon>
@@ -289,6 +293,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Services\ClientServices.svc" />
+    <Content Include="Services\DBFiles.svc" />
     <Content Include="Services\ImportServices.svc" />
     <Content Include="Services\ProductServices.svc" />
     <Content Include="Web.config">

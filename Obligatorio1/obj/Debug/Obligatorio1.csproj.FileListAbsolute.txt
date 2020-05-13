@@ -77,4 +77,3 @@ C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\o
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csproj.CopyComplete
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.dll
 C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.pdb
-C:\Users\avall\Documents\Andrés\ORT\Programación 3\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csprojAssemblyReference.cache

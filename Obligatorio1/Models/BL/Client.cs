@@ -21,6 +21,9 @@ namespace Obligatorio1.Models.BL
         public Client(string name, long tin, int discount, DateTime registerDate)
         { Name = name; Tin = tin; Discount = discount; RegisterDate = registerDate; }
 
+        public Client(string name, long tin, int discount, int seniority, DateTime registerDate)
+        { Name = name; Tin = tin; Discount = discount; Seniority = seniority; RegisterDate = registerDate; }
+
         public Client(long tin) { Tin = tin;}
 
         public bool isTinValid()

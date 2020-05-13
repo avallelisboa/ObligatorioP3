@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Obligatorio1.Models.BL;
 using Obligatorio1.Models.Repositories;
+using Obligatorio1.Services;
 
 namespace Obligatorio1.Controllers
 {
@@ -101,6 +102,22 @@ namespace Obligatorio1.Controllers
                 if (user.Role == "deposito") return Redirect("../Deposit/Index");
             }
             return Redirect("../Home/Index");
+        }
+
+        public ActionResult ExportDB()
+        {          
+            DBFiles proxy = new DBFiles();
+            ViewBag.DataMessage = proxy.ExportDatabase();
+
+            return Redirect("Index");
+        }
+
+        public ActionResult ImportDB()
+        {
+            DBFiles proxy = new DBFiles();
+            ViewBag.DataMessage = proxy.MakeTables();
+
+            return Redirect("Index");
         }
     }
 }

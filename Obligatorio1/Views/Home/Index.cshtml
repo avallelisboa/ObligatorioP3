@@ -24,14 +24,14 @@
                 <input type="submit" value="Registrar" />
             </form>
         </section>
-        <section class="row">
-            @if (Session["RegisterError"] != null)
-            {
-                <article class="col-lg-6 bg-danger">
-                    <p>@Convert.ToString(Session["RegisterError"])</p>
-                </article>
-            }
+        
+        @if (Session["RegisterError"] != null)
+        {<section class="row">
+            <article class="col-lg-6 bg-danger">
+                <p>@Convert.ToString(Session["RegisterError"])</p>
+            </article>
         </section>
+        }       
         <section class="row">
             <form class="col-lg-7" method="post" action="../Home/Login">
                 <h2>Iniciar sesión</h2>
@@ -40,14 +40,27 @@
                 <input type="submit" value="Iniciar Sesión" />
             </form>
         </section>
-        <section class="row">
-            @if (Session["LoginError"] != null)
-            {
+        
+        @if (Session["LoginError"] != null)
+        {
+            <section class="row">
                 <article class="col-7 bg-danger">
                     <p>@Convert.ToString(Session["LoginError"])</p>
                 </article>
-            }
+            </section>
+        }
+        
+        <section class="row">
+            <a class="btn btn-dark" href="ExportDB">Exportar Base de Datos</a>
+            <a class="btn btn-dark" href="ImportDB">Importar a Base de Datos</a>
         </section>
+
+        @if(ViewBag.DataMessage != null)
+        {
+            <section class="row bg-info">
+                <p>@ViewBag.DataMessage</p>
+            </section>
+        }
     </main>
 </body>
 </html>
