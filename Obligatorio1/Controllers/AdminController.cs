@@ -35,6 +35,7 @@ namespace Obligatorio1.Controllers
             else return Redirect("../Home/Index");
         }
 
+        [HttpPost]
         public ActionResult GetExpectedIncome(long tin)
         {
             if (Convert.ToString(Session["Role"]) == "admin")
@@ -47,6 +48,7 @@ namespace Obligatorio1.Controllers
             else return Redirect("../Home/Index");            
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             Session.Clear();

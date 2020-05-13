@@ -58,11 +58,26 @@ namespace Obligatorio1.Models.Repositories
                 con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Users", con);
-                var result = command.ExecuteReader().Cast<User>();
+                var reader = command.ExecuteReader();
+
+                List<User> users = new List<User>();
+
+                while (reader.Read())
+                {
+                    string role = Convert.ToString(reader["UserRole"]);
+                    if(role == "admin")
+                    {
+                        users.Add(new Admin(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Password"])));
+                    }
+                    else
+                    {
+                        users.Add(new Deposit(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Password"])));
+                    }
+                }
                 
                 con.Close();
 
-                return result;
+                return users;
             }
             catch(Exception err)
             {

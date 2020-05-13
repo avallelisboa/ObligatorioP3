@@ -86,8 +86,7 @@ namespace Obligatorio1.Controllers
         [HttpPost]
         public ActionResult Login(int id, string password)
         {
-            Session["LoginError"] = null;
-            Session["RegisterError"] = null;
+            Session.Clear();
 
             IRepository<User> userRepository = new UserRepository();
             User user = userRepository.FindById(id);
@@ -109,7 +108,7 @@ namespace Obligatorio1.Controllers
             DBFiles proxy = new DBFiles();
             ViewBag.DataMessage = proxy.ExportDatabase();
 
-            return Redirect("Index");
+            return View("Index");
         }
 
         public ActionResult ImportDB()
@@ -117,7 +116,7 @@ namespace Obligatorio1.Controllers
             DBFiles proxy = new DBFiles();
             ViewBag.DataMessage = proxy.MakeTables();
 
-            return Redirect("Index");
+            return View("Index");
         }
     }
 }

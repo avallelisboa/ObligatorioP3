@@ -60,11 +60,20 @@ namespace Obligatorio1.Models.Repositories
                 con.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Imports", con);
-                var result = command.ExecuteReader().Cast<Import>();
+                var reader = command.ExecuteReader();
+
+                IRepository<Product> pRepository = new ProductRepository();
+                IRepository<Client> cRepository = new ClientRepository();
+
+                List<Import> imports = new List<Import>();
+                while (reader.Read())
+                {
+                    imports.Add(new Import(Convert.ToInt32(reader["Id"]),pRepository.FindById(Convert.ToString(reader["ProductId"])),cRepository.FindById(Convert.ToInt64(reader["Tin"])),Convert.ToInt32(reader["Ammount"]),Convert.ToInt32(reader["PriceByUnit"]),Convert.ToDateTime(reader["EntryDate"]),Convert.ToDateTime(reader["DepartureDate"]),Convert.ToBoolean(reader["IsStored"])));
+                }
 
                 con.Close();
 
-                return result;
+                return imports;
             }
             catch (Exception err)
             {

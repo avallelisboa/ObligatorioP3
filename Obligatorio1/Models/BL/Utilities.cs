@@ -35,8 +35,8 @@ namespace Obligatorio1.Models.BL
         }
         public static bool MakeTables()
         {
-            return makeClientsTable() && makeImportsTable()
-                 && makeProductsTable() && makeUsersTable();
+            return makeClientsTable() && makeUsersTable()
+                 && makeProductsTable() && makeImportsTable();
         }
 
         public static bool MakeFiles()
@@ -75,8 +75,10 @@ namespace Obligatorio1.Models.BL
                 {
                     string[] values = line.Split('#');
 
-                    Client client = new Client(values[0], Convert.ToInt64(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]), Convert.ToDateTime(values[4]));
+                    Client client = new Client(Convert.ToString(values[0]), Convert.ToInt64(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]), Convert.ToDateTime(values[4]));
                     clientList.Add(client);
+
+                    line = file.ReadLine();
                 }
 
                 IRepository<Client> clientRepository = new ClientRepository();
@@ -117,6 +119,8 @@ namespace Obligatorio1.Models.BL
 
                     Import import = new Import(product, client, Convert.ToInt32(values[2]), Convert.ToInt32(values[3]), Convert.ToDateTime(values[4]), Convert.ToDateTime(values[5]),Convert.ToBoolean(values[6]));
                     importList.Add(import);
+
+                    line = file.ReadLine();
                 }
 
                 IRepository<Import> importRepository = new ImportRepository();
@@ -155,6 +159,8 @@ namespace Obligatorio1.Models.BL
 
                     Product product = new Product(values[0], values[1], Convert.ToInt32(values[2]), client);
                     productList.Add(product);
+
+                    line = file.ReadLine();
                 }
 
                 IRepository<Product> productRepository = new ProductRepository();
@@ -200,6 +206,8 @@ namespace Obligatorio1.Models.BL
                     }
 
                     userList.Add(user);
+
+                    line = file.ReadLine();
                 }
 
                 IRepository<User> userRepository = new UserRepository();
@@ -226,11 +234,11 @@ namespace Obligatorio1.Models.BL
 
             try
             { 
-                StreamWriter file = new StreamWriter(route);
+                StreamWriter file = new StreamWriter(route,false);
 
                 foreach (var c in clients)
                 {
-                    file.WriteLine($"{c.Name}#{c.Tin}#{c.Discount}#{c.Seniority}#{c.RegisterDate}");
+                    file.WriteLine($"{c.Name}#{c.Tin}#{c.Discount}#{c.Seniority}#{c.RegisterDate}#");
                 }
 
                 file.Close();
@@ -251,11 +259,11 @@ namespace Obligatorio1.Models.BL
 
             try
             {
-                StreamWriter file = new StreamWriter(route);
+                StreamWriter file = new StreamWriter(route, false);
 
                 foreach (var i in imports)
                 {
-                    file.WriteLine($"{i.Id}#{i.ImportedProduct.Id}#{i.ImportingClient.Tin}#{i.Ammount}#{i.PriceByUnit}#{i.EntryDate}#{i.DepartureDate}#{i.IsStored}");
+                    file.WriteLine($"{i.ImportedProduct.Id}#{i.ImportingClient.Tin}#{i.Ammount}#{i.PriceByUnit}#{i.EntryDate}#{i.DepartureDate}#{i.IsStored}#");
                 }
 
                 file.Close();
@@ -276,11 +284,11 @@ namespace Obligatorio1.Models.BL
 
             try
             {
-                StreamWriter file = new StreamWriter(route);
+                StreamWriter file = new StreamWriter(route, false);
 
                 foreach (var p in products)
                 {
-                    file.WriteLine($"{p.Id}#{p.Name}#{p.Weight}#{p.Importer.Tin}");
+                    file.WriteLine($"{p.Id}#{p.Name}#{p.Weight}#{p.Importer.Tin}#");
                 }
 
                 file.Close();
@@ -301,11 +309,11 @@ namespace Obligatorio1.Models.BL
 
             try
             {
-                StreamWriter file = new StreamWriter(route);
+                StreamWriter file = new StreamWriter(route, false);
 
                 foreach (var u in users)
                 {
-                    file.WriteLine($"{u.Id}#{u.Password}#{u.Role}");
+                    file.WriteLine($"{u.Id}#{u.Password}#{u.Role}#");
                 }
 
                 file.Close();

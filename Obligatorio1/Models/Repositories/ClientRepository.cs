@@ -23,17 +23,19 @@ namespace Obligatorio1.Models.Repositories
                     SqlConnection con = new SqlConnection(connectionString);
                     con.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO Client(Tin, ClientName, Discount, Seniority) VALUES(@tin, @name, @discount, @seniority)", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO Clients(Tin, ClientName, Discount, Seniority, RegisterDate) VALUES(@tin, @name, @discount, @seniority, @registerDate)", con);
 
                     SqlParameter _tin = new SqlParameter("@tin", instance.Tin);
                     SqlParameter _name = new SqlParameter("@name", instance.Name);
                     SqlParameter _discount = new SqlParameter("@discount", instance.Discount);
                     SqlParameter _seniority = new SqlParameter("@seniority", instance.Seniority);
+                    SqlParameter _registerDate = new SqlParameter("@registerDate", instance.RegisterDate);
 
                     command.Parameters.Add(_tin);
                     command.Parameters.Add(_name);
                     command.Parameters.Add(_discount);
                     command.Parameters.Add(_seniority);
+                    command.Parameters.Add(_registerDate);
 
                     var result = command.ExecuteNonQuery();
 
@@ -67,7 +69,9 @@ namespace Obligatorio1.Models.Repositories
                     long _tin = Convert.ToInt64(result["Tin"]);
                     string _name = Convert.ToString(result["ClientName"]);
                     DateTime _registerDate = Convert.ToDateTime(result["RegisterDate"]);
-                    Client client = new Client(_name, _tin, _registerDate);
+                    int _discount = Convert.ToInt32(result["Discount"]);
+                    int _seniority = Convert.ToInt32(result["Seniority"]);
+                    Client client = new Client(_name, _tin,_discount,_seniority, _registerDate);
                     clientsList.Add(client);
                 }
 

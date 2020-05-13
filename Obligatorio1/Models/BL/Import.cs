@@ -19,6 +19,19 @@ namespace Obligatorio1.Models.BL
             IsStored = isStored;
         }
 
+        public Import(int id,Product importedProduct, Client importingClient, int ammount,
+                        int priceByUnit, DateTime entryDate, DateTime departureDate, bool isStored)
+        {
+            Id = id;
+            ImportedProduct = importedProduct;
+            ImportingClient = importingClient;
+            Ammount = ammount;
+            PriceByUnit = priceByUnit;
+            EntryDate = entryDate;
+            DepartureDate = departureDate;
+            IsStored = isStored;
+        }
+
         public int Id { get; set; }
         public Product ImportedProduct { get; set; }
         public Client ImportingClient { get; set; }
